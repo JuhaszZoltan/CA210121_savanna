@@ -52,7 +52,7 @@ namespace CA210121_savanna
             Eletkor++;
             eveSzaporodott++;
             Ehseg++;
-            if (Ehseg >= 2) El = false;
+            if (Ehseg >= 3) El = false;
             if (Eletkor >= MaxEletkor) El = false;
         }
         abstract public Allat Szaporodik();
