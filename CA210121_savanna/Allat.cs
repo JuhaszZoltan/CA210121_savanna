@@ -9,9 +9,8 @@ namespace CA210121_savanna
     abstract class Allat
     {
         private int _eletkor;
-
-        //TODO: Max Eletkor?
-        public int Eletkor { 
+        public int Eletkor 
+        { 
             get => _eletkor;
             set
             {
@@ -20,8 +19,8 @@ namespace CA210121_savanna
                 _eletkor = value;
             }
         }
-        abstract public int MaxEletkor { get; protected set; }
-        private int _ehseg;
+        abstract public int MaxEletkor { get; set; }
+        private int _ehseg = 0;
         public int Ehseg
         {
             get => _ehseg;
@@ -44,24 +43,19 @@ namespace CA210121_savanna
             }
         }
 
-        //TODO: ?????
-        protected Szavanna Szavanna { get; set; }
+        protected int eveSzaporodott = 0;
 
-        protected int EvMulvaTudSzaporodni = 0;
+        abstract public bool VanKedve { get; }
+
         public void Oregszik()
         {
             Eletkor++;
-            if (EvMulvaTudSzaporodni != 0) EvMulvaTudSzaporodni--;
-            if (Eletkor == MaxEletkor) El = false;
+            eveSzaporodott++;
+            if (Ehseg >= 2) El = false;
+            if (Eletkor >= MaxEletkor) El = false;
         }
         abstract public Allat Szaporodik();
 
-        abstract public void Eszik();
-
-        //TODO: ??????
-        public void Mozog()
-        {
-            throw new NotImplementedException();
-        }
+        public void Eszik() => Ehseg = 0;
     }
 }

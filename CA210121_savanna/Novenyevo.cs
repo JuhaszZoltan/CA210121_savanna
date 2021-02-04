@@ -12,33 +12,19 @@ namespace CA210121_savanna
         public override int MaxEletkor 
         {
             get => _maxEletkor;
-            protected set
+            set
             {
                 if (value > 14) throw new Exception("nem megfelelő max életkor");
                 _maxEletkor = value;
             }
         }
 
-        public override void Eszik() { }
-
+        public override bool VanKedve => eveSzaporodott >= 2;
 
         public override Allat Szaporodik()
         {
-
-            if(EvMulvaTudSzaporodni != 0)
-            {
-                return null;
-            }
-            else
-            {
-                //List<Allat> kornyezoAllatok = Szavanna.KornyezoAllatok(this);
-
-
-                var ujegyed = new Novenyevo();
-                EvMulvaTudSzaporodni = 2;
-
-                return ujegyed;
-            }
+            eveSzaporodott = 0;
+            return new Novenyevo() { Eletkor = 0, MaxEletkor = Program.rnd.Next(11, 15) };
         }
     }
 }
