@@ -38,7 +38,7 @@ namespace CA210121_savanna
             get => _el;
             set
             {
-                // if (_el is false) throw new Exception("no resurrection here");
+                if (_el == false) throw new Exception("no resurrection here");
                 _el = value;
             }
         }
@@ -53,7 +53,7 @@ namespace CA210121_savanna
             eveSzaporodott++;
             Ehseg++;
             if (Ehseg >= 3) El = false;
-            if (Eletkor >= MaxEletkor) El = false;
+            else if (Eletkor >= MaxEletkor) El = false;
         }
         abstract public Allat Szaporodik();
 

@@ -22,10 +22,10 @@ namespace CA210121_savanna
 
                 if(szavanna.Terulet[x, y] is null)
                 {
-                    if(rnd.Next(100) < 65)
+                    if(rnd.Next(100) < 60)
                     {
                         var me = rnd.Next(11, 15);
-                        var ae = rnd.Next(me);
+                        var ae = rnd.Next(me /2);
                         szavanna.Terulet[x, y] = new Novenyevo()
                         {
                             MaxEletkor = me,
@@ -36,7 +36,7 @@ namespace CA210121_savanna
                     else
                     {
                         var me = rnd.Next(9, 13);
-                        var ae = rnd.Next(me);
+                        var ae = rnd.Next(me/2);
                         szavanna.Terulet[x, y] = new Ragadozo()
                         {
                             MaxEletkor = me,
@@ -56,7 +56,7 @@ namespace CA210121_savanna
             {
                 szavanna.EltelikEgyEv();
                 szavanna.Kirajzol();
-                Console.ReadKey();
+                //Console.ReadKey();
                 Console.Clear();
             }
 

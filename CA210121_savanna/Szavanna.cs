@@ -31,7 +31,6 @@ namespace CA210121_savanna
             }
         }
 
-        //TODO: miért nem megeszik???
         public void Elpusztult(Novenyevo allat)
         {
             Torol(allat);
@@ -105,41 +104,51 @@ namespace CA210121_savanna
 
             foreach (var a in osszesAllat)
             {
-                if(a.El)
-                {
-                    //eszik
+                //eszik
+                if (a.El)
+                {                   
                     if (a is Novenyevo) a.Eszik();
                     else
                     {
                         var kornyezoNovenyevok = KornyezoAllatok(a, true);
-                        if(kornyezoNovenyevok != null && kornyezoNovenyevok.Count > 0)
+                        if (kornyezoNovenyevok != null && kornyezoNovenyevok.Count > 0)
                         {
                             var zsakmany = kornyezoNovenyevok[Program.rnd.Next(kornyezoNovenyevok.Count)];
                             Elpusztult(zsakmany as Novenyevo);
                             a.Eszik();
                         }
                     }
+                }
 
-                    //szaporodás
-                    var kornyezoFajtarsak = KornyezoAllatok(a, a is Novenyevo);
-                    var kornyezoCellak = KornyezoUresCellak(a);
+                var kornyezoFajtarsak = KornyezoAllatok(a, a is Novenyevo);
+                var kornyezoCellak = KornyezoUresCellak(a);
 
-                    if (a.VanKedve && 
+                //szaporodás
+                if (a.El)
+                {                   
+                    if (a.VanKedve &&
                         kornyezoFajtarsak != null && kornyezoFajtarsak.Count > 0 &&
                         kornyezoCellak != null && kornyezoCellak.Count > 0)
                     {
                         var utod = a.Szaporodik();
                         Elhelyez(utod, kornyezoCellak[Program.rnd.Next(kornyezoCellak.Count)]);
                     }
+                }
 
-                    //mozgás
+                //mozgás
+                if (a.El)
+                {
                     kornyezoCellak = KornyezoUresCellak(a);
-                    if(kornyezoCellak != null && kornyezoCellak.Count > 0)
+                    if (kornyezoCellak != null && kornyezoCellak.Count > 0)
                     {
                         Mozgat(a, kornyezoCellak[Program.rnd.Next(kornyezoCellak.Count)]);
                     }
+                }
 
-                    //öregedés
+
+                //öregedés
+                if (a.El)
+                {
                     a.Oregszik();
                     if (!a.El) Torol(a);
                 }
@@ -161,8 +170,6 @@ namespace CA210121_savanna
             }
             return allatok;
         }
-
-
         public void Kirajzol()
         {
             for (int x = 0; x < Terulet.GetLength(0); x++)
